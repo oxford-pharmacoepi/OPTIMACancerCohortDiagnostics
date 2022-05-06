@@ -1,8 +1,8 @@
 {
   "ConceptSets": [
     {
-      "id": 0,
-      "name": "bowel cancer",
+      "id": 1,
+      "name": "bowel cancer2",
       "expression": {
         "items": [
           {
@@ -11,6 +11,21 @@
               "CONCEPT_CODE": "126838000",
               "CONCEPT_ID": 4130995,
               "CONCEPT_NAME": "Neoplasm of colon",
+              "DOMAIN_ID": "Condition",
+              "INVALID_REASON": "V",
+              "INVALID_REASON_CAPTION": "Valid",
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
+            },
+            "includeDescendants": true
+          },
+          {
+            "concept": {
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "126847008",
+              "CONCEPT_ID": 4131616,
+              "CONCEPT_NAME": "Neoplasm of rectum",
               "DOMAIN_ID": "Condition",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
@@ -28,7 +43,7 @@
     "CriteriaList": [
       {
         "ConditionOccurrence": {
-          "CodesetId": 0
+          "CodesetId": 1
         }
       }
     ],
