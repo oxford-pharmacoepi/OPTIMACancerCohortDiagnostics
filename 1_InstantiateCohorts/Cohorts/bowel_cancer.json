@@ -2,21 +2,21 @@
   "ConceptSets": [
     {
       "id": 0,
-      "name": "Anti epileptic drugs",
+      "name": "bowel cancer",
       "expression": {
         "items": [
           {
             "concept": {
-              "CONCEPT_CLASS_ID": "ATC 2nd",
-              "CONCEPT_CODE": "N03",
-              "CONCEPT_ID": 21604389,
-              "CONCEPT_NAME": "ANTIEPILEPTICS",
-              "DOMAIN_ID": "Drug",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "CONCEPT_CODE": "126838000",
+              "CONCEPT_ID": 4130995,
+              "CONCEPT_NAME": "Neoplasm of colon",
+              "DOMAIN_ID": "Condition",
               "INVALID_REASON": "V",
               "INVALID_REASON_CAPTION": "Valid",
-              "STANDARD_CONCEPT": "C",
-              "STANDARD_CONCEPT_CAPTION": "Classification",
-              "VOCABULARY_ID": "ATC"
+              "STANDARD_CONCEPT": "S",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "VOCABULARY_ID": "SNOMED"
             },
             "includeDescendants": true
           }
@@ -27,7 +27,7 @@
   "PrimaryCriteria": {
     "CriteriaList": [
       {
-        "DrugExposure": {
+        "ConditionOccurrence": {
           "CodesetId": 0
         }
       }
