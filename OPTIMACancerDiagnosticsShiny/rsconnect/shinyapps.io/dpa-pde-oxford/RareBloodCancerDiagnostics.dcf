@@ -1,0 +1,13 @@
+name: RareBloodCancerDiagnostics
+title: RareBloodCancerDiagnostics
+username:
+account: dpa-pde-oxford
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7320588
+bundleId: 6408161
+url: https://dpa-pde-oxford.shinyapps.io/RareBloodCancerDiagnostics/
+when: 1665928185.96623
+lastSyncTime: 1665928185.96623
+asMultiple: FALSE
+asStatic: FALSE
