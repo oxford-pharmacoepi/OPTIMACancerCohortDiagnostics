@@ -1,3 +1,6 @@
+# label your output folder ---------------------------
+outputFolder <- "output"
+
 # which DQ check levels to run -------------------------------------------------------------------
 checkLevels <- c("TABLE", "FIELD", "CONCEPT")
 
