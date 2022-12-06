@@ -1,9 +1,0 @@
-2022-11-25 22:15:02	[Main thread]	INFO	DataQualityDashboard	executeDqChecks	CDM Tables skipped: CONCEPT, VOCABULARY, CONCEPT_ANCESTOR, CONCEPT_RELATIONSHIP, CONCEPT_CLASS, CONCEPT_SYNONYM, RELATIONSHIP, DOMAIN
-2022-11-25 22:15:02	[Main thread]	INFO	DatabaseConnector	connect	Connecting using PostgreSQL driver
-2022-11-25 22:15:02	[Main thread]	INFO	DataQualityDashboard	FUN	Processing check description: cdmTable
-2022-11-25 23:54:26	[Main thread]	INFO	DataQualityDashboard	FUN	Processing check description: measurePersonCompleteness
-2022-11-26 02:41:40	[Main thread]	INFO	DataQualityDashboard	FUN	Processing check description: measureConditionEraCompleteness
-2022-11-26 03:46:30	[Main thread]	INFO	DataQualityDashboard	FUN	Processing check description: cdmField
-2022-11-27 07:41:58	[Main thread]	ERROR	DataQualityDashboard	3	[Level: FIELD] [Check: cdmField] [CDM Table: COST] [CDM Field: REVENUE_CODE_SOURCE_VALUE] Error executing SQL: org.postgresql.util.PSQLException: ERROR: column "revenue_code_source_value" does not exist   Hint: Perhaps you meant to reference the column "cdmtable.reveue_code_source_value".   Position: 267 An error report has been created at  output/errors/FIELD_cdmField_COST_REVENUE_CODE_SOURCE_VALUE.txt
-2022-11-27 08:06:18	[Main thread]	INFO	DataQualityDashboard	FUN	Processing check description: isRequired
-2022-11-27 08:18:47	[Main thread]	INFO	DataQualityDashboard	FUN	Processing check description: cdmDatatype
