@@ -1,0 +1,13 @@
+name: OPTIMACancerDiagnosticsShinyFull
+title: OPTIMACancerDiagnosticsShinyFull
+username:
+account: dpa-pde-oxford
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7905288
+bundleId: 6644718
+url: https://dpa-pde-oxford.shinyapps.io/OPTIMACancerDiagnosticsShinyFull/
+when: 1671201966.02091
+lastSyncTime: 1671201966.02091
+asMultiple: FALSE
+asStatic: FALSE

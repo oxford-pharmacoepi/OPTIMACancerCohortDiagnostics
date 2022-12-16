@@ -61,15 +61,15 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 # naming dataframe (namingdf) is a dataframe of 2 columns containing the cohort_ID and the cohort name for the current
 # cohort diagnostics outputs you want to convert 
 # cohort_id <- c(seq(1:9))
-# cohort_name <- c("MalignantBreastCancer"    , 
-#                  "MalignantColorectalCancer"   ,  
+# cohort_name <- c("MalignantBreastCancer"    ,
+#                  "MalignantColorectalCancer"   ,
 #                  "MalignantColorectalCancerBROAD" ,
-#                  "MalignantHeadNeckCancer"     ,  
-#                  "MalignantLiverCancer"  ,  
-#                  "MalignantLungCancer"        ,   
+#                  "MalignantHeadNeckCancer"     ,
+#                  "MalignantLiverCancer"  ,
+#                  "MalignantLungCancer"        ,
 #                  "MalignantPancreaticCancer" ,
-#                  "MalignantProstateCancer"   ,    
-#                  "MalignantStomachCancer"  
+#                  "MalignantProstateCancer"   ,
+#                  "MalignantStomachCancer"
 # )
 # 
 # namingdf <- as.data.frame(cbind(cohort_id, cohort_name)) %>%
@@ -79,12 +79,12 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #   function(inputFolder,
 #            outputFolder,
 #            namingdf) {
-#     
+# 
 #     tempFolder <- tempdir()
 #     unzipFolder <- tempfile(tmpdir = tempFolder)
 #     dir.create(path = unzipFolder, recursive = TRUE)
 #     on.exit(unlink(unzipFolder, recursive = TRUE), add = TRUE)
-#     
+# 
 #     zipFiles <-
 #       list.files(
 #         path = inputFolder,
@@ -93,11 +93,11 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #         recursive = TRUE,
 #         include.dirs = TRUE
 #       )
-#     
+# 
 #     if (length(zipFiles) == 0) {
 #       stop("Did not find zipped file in inputFolder location")
 #     }
-#     
+# 
 #     resultsDataModel <-
 #       CohortDiagnostics::getResultsDataModelSpecifications()
 #     tablesInResultsDataModel <- resultsDataModel %>%
@@ -105,8 +105,8 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #       dplyr::distinct() %>%
 #       dplyr::arrange() %>%
 #       dplyr::pull(.data$tableName)
-#     
-#     
+# 
+# 
 #     for (i in (1:length(zipFiles))) {
 #       ParallelLogger::logInfo("Unzipping ", basename(zipFiles[[i]]))
 #       exportDirectory <-
@@ -116,7 +116,7 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #                    exdir = exportDirectory)
 #       listOfFilesInZippedFolder <-
 #         list.files(path = exportDirectory, pattern = ".csv")
-#       
+# 
 #       for (j in (1:length(tablesInResultsDataModel))) {
 #         if (paste0(tablesInResultsDataModel[[j]], ".csv") %in% listOfFilesInZippedFolder) {
 #           dataFromZip <-
@@ -125,14 +125,14 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #               paste0(tablesInResultsDataModel[[j]], ".csv")
 #             ),
 #             col_types = readr::cols()) # if csv file is in list of zipped files then read it
-#           
+# 
 #           if ("cohort_id" %in% colnames(dataFromZip)) {
-#             
+# 
 #             if(paste0(tablesInResultsDataModel[[j]], ".csv") == "cohort.csv"){
-#               
+# 
 #               dataFromZip <- dataFromZip %>%
 #                 dplyr::inner_join(x = ., y = namingdf, by = c("cohort_id"))
-#               
+# 
 #               dataFromZip <- dataFromZip %>%
 #                 dplyr::mutate(cohort_id = case_when(cohort_name.y == "MalignantBreastCancer" ~ 1,
 #                                                     cohort_name.y == "MalignantColorectalCancer"~ 2,
@@ -147,13 +147,13 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #                                                     cohort_name.y == "MalignantStomachCancer"~ 11 )) %>%
 #                 dplyr::select(-(cohort_name.y)) %>%
 #                 dplyr::rename(cohort_name = cohort_name.x)
-#               
+# 
 #             }
-#             
-#             if(paste0(tablesInResultsDataModel[[j]], ".csv") != "cohort.csv"){      
+# 
+#             if(paste0(tablesInResultsDataModel[[j]], ".csv") != "cohort.csv"){
 #               dataFromZip <- dataFromZip %>%
 #                 dplyr::inner_join(x = ., y = namingdf, by = c("cohort_id"))
-#               
+# 
 #               dataFromZip <- dataFromZip %>%
 #                 dplyr::mutate(cohort_id = case_when(cohort_name == "MalignantBreastCancer" ~ 1,
 #                                                     cohort_name == "MalignantColorectalCancer"~ 2,
@@ -167,16 +167,16 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #                                                     cohort_name == "MalignantProstateCancer"~ 10,
 #                                                     cohort_name == "MalignantStomachCancer"~ 11 )) %>%
 #                 dplyr::select(-(cohort_name))
-#               
+# 
 #             }
-#             
+# 
 #           }
-#           
+# 
 #           if ("target_cohort_id" %in% colnames(dataFromZip)) {
-#             
+# 
 #             dataFromZip <- dataFromZip %>%
 #               dplyr::inner_join(x = ., y = namingdf, by = c("target_cohort_id" = "cohort_id"))
-#             
+# 
 #             dataFromZip <- dataFromZip %>%
 #               dplyr::mutate(target_cohort_id = case_when(cohort_name == "MalignantBreastCancer" ~ 1,
 #                                                          cohort_name == "MalignantColorectalCancer"~ 2,
@@ -190,10 +190,10 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #                                                          cohort_name == "MalignantProstateCancer"~ 10,
 #                                                          cohort_name == "MalignantStomachCancer"~ 11 )) %>%
 #               dplyr::select(-(cohort_name))
-#             
+# 
 #             dataFromZip <- dataFromZip %>%
 #               dplyr::inner_join(x = ., y = namingdf, by = c("comparator_cohort_id" = "cohort_id"))
-#             
+# 
 #             dataFromZip <- dataFromZip %>%
 #               dplyr::mutate(comparator_cohort_id = case_when(cohort_name == "MalignantBreastCancer" ~ 1,
 #                                                              cohort_name == "MalignantColorectalCancer"~ 2,
@@ -207,9 +207,9 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #                                                              cohort_name == "MalignantProstateCancer"~ 10,
 #                                                              cohort_name == "MalignantStomachCancer"~ 11 )) %>%
 #               dplyr::select(-(cohort_name))
-#             
+# 
 #           }
-#           
+# 
 #           readr::write_excel_csv(
 #             x = dataFromZip,
 #             file = file.path(
@@ -222,7 +222,7 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #           )
 #         }
 #       }
-#       
+# 
 #       dir.create(path = outputFolder,
 #                  showWarnings = FALSE,
 #                  recursive = TRUE)
@@ -237,14 +237,14 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #         rootFolder = exportDirectory
 #       )
 #     }
-#     
+# 
 #   }
 # 
 # 
 # aligningresults(inputFolder = here("Results", "ToAlign" ),
 #                 outputFolder = here("Results", "ToFilter"),
 #                 namingdf = namingdf
-#                 
+# 
 # )
 # 
 # #remove cohorts we do not need
@@ -252,19 +252,19 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #   function(inputFolder,
 #            outputFolder,
 #            cohortIds) {
-#     
+# 
 #     checkmate::assertIntegerish(
 #       x = cohortIds,
 #       any.missing = FALSE,
 #       min.len = 1,
 #       null.ok = FALSE
 #     )
-#     
+# 
 #     tempFolder <- tempdir()
 #     unzipFolder <- tempfile(tmpdir = tempFolder)
 #     dir.create(path = unzipFolder, recursive = TRUE)
 #     on.exit(unlink(unzipFolder, recursive = TRUE), add = TRUE)
-#     
+# 
 #     zipFiles <-
 #       list.files(
 #         path = inputFolder,
@@ -273,11 +273,11 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #         recursive = TRUE,
 #         include.dirs = TRUE
 #       )
-#     
+# 
 #     if (length(zipFiles) == 0) {
 #       stop("Did not find zipped file in inputFolder location")
 #     }
-#     
+# 
 #     resultsDataModel <-
 #       CohortDiagnostics::getResultsDataModelSpecifications()
 #     tablesInResultsDataModel <- resultsDataModel %>%
@@ -285,7 +285,7 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #       dplyr::distinct() %>%
 #       dplyr::arrange() %>%
 #       dplyr::pull(.data$tableName)
-#     
+# 
 #     for (i in (1:length(zipFiles))) {
 #       ParallelLogger::logInfo("Unzipping ", basename(zipFiles[[i]]))
 #       exportDirectory <-
@@ -295,7 +295,7 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #                    exdir = exportDirectory)
 #       listOfFilesInZippedFolder <-
 #         list.files(path = exportDirectory, pattern = ".csv")
-#       
+# 
 #       for (j in (1:length(tablesInResultsDataModel))) {
 #         if (paste0(tablesInResultsDataModel[[j]], ".csv") %in% listOfFilesInZippedFolder) {
 #           dataFromZip <-
@@ -304,22 +304,22 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #               paste0(tablesInResultsDataModel[[j]], ".csv")
 #             ),
 #             col_types = readr::cols())
-#           
+# 
 #           if ("cohort_id" %in% colnames(dataFromZip)) {
 #             dataFromZip <- dataFromZip %>%
 #               dplyr::filter(.data$cohort_id %in% cohortIds)
 #           }
-#           
-#           
+# 
+# 
 #           if ("target_cohort_id" %in% colnames(dataFromZip)) {
 #             dataFromZip <- dataFromZip %>%
 #               dplyr::filter(.data$target_cohort_id %in% cohortIds) %>%
 #               dplyr::filter(.data$comparator_cohort_id %in% cohortIds)
-#             
+# 
 #           }
-#           
-#           
-#           
+# 
+# 
+# 
 #           readr::write_excel_csv(
 #             x = dataFromZip,
 #             file = file.path(
@@ -332,7 +332,7 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #           )
 #         }
 #       }
-#       
+# 
 #       dir.create(path = outputFolder,
 #                  showWarnings = FALSE,
 #                  recursive = TRUE)
@@ -355,6 +355,19 @@ CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 #                  cohortIds = c(1,8,10)
 # )
 # 
+# 
 # # Review results -----
 # CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = here("Results", "ForShiny"))
 # CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results", "ForShiny"))
+# 
+# 
+# subsetResultsZip(inputFolder = here("Results", "ToFilter"),
+#                  outputFolder = here("Results", "ForShinyFull"),
+#                  cohortIds = c(1,2,5,7,8,9,10,11)
+# )
+# 
+# CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = here("Results", "ForShinyFull"))
+# CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results", "ForShinyFull"))
+# 
+
+
