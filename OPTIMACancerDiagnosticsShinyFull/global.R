@@ -543,6 +543,39 @@ if (exists("orphanConcept")) {
 }
 
 
+if (exists("resolvedConcepts")) {
+  
+  resolvedConcepts <- resolvedConcepts %>%
+    dplyr::mutate( across(where(is.character), ~stringr::str_replace( ., "Disease Analyser France", "IQVIA DA France" )
+    ) ) %>%
+    dplyr::mutate( across(where(is.character), ~stringr::str_replace( ., "Disease Analyser Germany", "IQVIA DA Germany" )
+    ) ) %>%
+    dplyr::mutate( across(where(is.character), ~stringr::str_replace( ., "IQVIA_LPD_BELGIUM", "IQVIA LPD Belgium" )
+    ) ) %>%
+    dplyr::mutate( across(where(is.character), ~stringr::str_replace( ., "LPD France", "IQVIA LPD France" )
+    ) ) %>%
+    dplyr::mutate( across(where(is.character), ~stringr::str_replace( ., "LPD Italy", "IQVIA LPD Italy" )
+    ) ) 
+  
+}
+
+
+if (exists("temporalCovariateValue")) {
+  
+  temporalCovariateValue <- temporalCovariateValue %>%
+    dplyr::mutate( across(where(is.character), ~stringr::str_replace( ., "Disease Analyser France", "IQVIA DA France" )
+    ) ) %>%
+    dplyr::mutate( across(where(is.character), ~stringr::str_replace( ., "Disease Analyser Germany", "IQVIA DA Germany" )
+    ) ) %>%
+    dplyr::mutate( across(where(is.character), ~stringr::str_replace( ., "IQVIA_LPD_BELGIUM", "IQVIA LPD Belgium" )
+    ) ) %>%
+    dplyr::mutate( across(where(is.character), ~stringr::str_replace( ., "LPD France", "IQVIA LPD France" )
+    ) ) %>%
+    dplyr::mutate( across(where(is.character), ~stringr::str_replace( ., "LPD Italy", "IQVIA LPD Italy" )
+    ) ) 
+  
+}
+
 
 
 
