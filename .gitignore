@@ -5,3 +5,6 @@
 postgresql*
 .Rprofile*
 CodeToRunLocal.R
+Results/*
+
+
