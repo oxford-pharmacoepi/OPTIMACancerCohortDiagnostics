@@ -54,7 +54,7 @@ source(here("RunAnalysis.R"))
 
 # Review results -----
 CohortDiagnostics::preMergeDiagnosticsFiles(dataFolder = here("Results"))
-CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
+#CohortDiagnostics::launchDiagnosticsExplorer(dataFolder = here("Results"))
 
 #Make results compatable ---- DATABASE DO NOT RUN
 # This runs to make all cohort numbers consistent as some data partners can only run certain conditions
