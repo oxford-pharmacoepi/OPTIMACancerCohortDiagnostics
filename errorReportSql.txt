@@ -1,0 +1,59 @@
+DBMS:
+postgresql
+
+Error:
+org.postgresql.util.PSQLException: ERROR: relation "public_100k.device_exposure" does not exist
+  Position: 314
+
+SQL:
+CREATE TEMP TABLE cov_3
+AS
+SELECT
+CAST(device_concept_id AS BIGINT) * 1000 + 602 AS covariate_id,
+	cohort_definition_id,
+	COUNT(*) AS sum_value
+FROM
+(
+	SELECT DISTINCT device_concept_id,
+		cohort_definition_id,
+		cohort.subject_id,
+		cohort.cohort_start_date
+	FROM results.DNCohortDiagGOLD100k cohort
+	INNER JOIN public_100k.device_exposure
+		ON cohort.subject_id = device_exposure.person_id
+	WHERE device_exposure_start_date <= (cohort.cohort_start_date + 0*INTERVAL'1 day')
+		AND 
+device_exposure_start_date
+>= (cohort.cohort_start_date + -365*INTERVAL'1 day')
+		AND device_concept_id != 0
+		AND cohort.cohort_definition_id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28)
+) by_row_id
+GROUP BY cohort_definition_id,
+	device_concept_id
+
+
+R version:
+R version 4.1.2 (2021-11-01)
+
+Platform:
+x86_64-pc-linux-gnu
+
+Attached base packages:
+- stats
+- graphics
+- grDevices
+- datasets
+- utils
+- methods
+- base
+
+Other attached packages:
+- stringr (1.4.0)
+- here (1.0.1)
+- CohortGenerator (0.3.0)
+- CirceR (1.1.1)
+- CohortDiagnostics (2.2.4)
+- FeatureExtraction (3.2.0)
+- Andromeda (0.6.0)
+- dplyr (1.0.9)
+- DatabaseConnector (5.0.2)
